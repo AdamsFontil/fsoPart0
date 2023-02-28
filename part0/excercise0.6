@@ -1,0 +1,13 @@
+sequenceDiagramforNotesOnSPA
+    participant browser
+    participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate server
+    server-->>browser: return status code of 201, which POST succeed, a message is also returned telling the browser that the "note {was} created"
+    deactivate server
+
+    No new GET requests are made instead, the callback function, or event listener the one
+    on window.onload is activated. Which first prevents the submit button from working normally,
+    instead it adds the note value to the notes array on the browser, it clears the notes input
+    textbox, runs the redrawnotes functions and send/POST the note to the server
